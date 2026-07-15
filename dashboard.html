@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Nitro - Activated</title>
+    <link rel="icon" href="https://cdn.prod.website-files.com/6257adef93867e50d84b30e2/62f50ba20329c2d0fe0df60c_discord-icon-svgrepo-com.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #1e1f22 0%, #2b2d31 50%, #1e1f22 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 520px;
+            animation: slideUp 0.6s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .success-card {
+            background: #313338;
+            border-radius: 16px;
+            padding: 48px 32px 36px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .success-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff73fa, #b377f7, #5865f2);
+        }
+
+        .checkmark {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #23a559, #1a8a47);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 36px;
+            box-shadow: 0 4px 20px rgba(35, 165, 89, 0.3);
+            animation: popIn 0.5s ease 0.2s both;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0); }
+            70% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .success-card h1 {
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #fff, #b5bac1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .success-card .sub {
+            color: #b5bac1;
+            font-size: 15px;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        .success-card .sub strong {
+            color: #fff;
+        }
+
+        .activated-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(35, 165, 89, 0.12);
+            border: 1px solid rgba(35, 165, 89, 0.25);
+            border-radius: 20px;
+            padding: 8px 18px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #23a559;
+            margin-bottom: 20px;
+        }
+
+        .perks-activated {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .perk-active {
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .perk-active .emoji { font-size: 20px; margin-bottom: 4px; }
+        .perk-active .name { font-size: 11px; color: #b5bac1; font-weight: 500; }
+        .perk-active .check { color: #23a559; font-size: 12px; margin-top: 2px; }
+
+        .alert-box {
+            background: rgba(237, 66, 69, 0.06);
+            border: 1px solid rgba(237, 66, 69, 0.12);
+            border-radius: 10px;
+            padding: 16px 18px;
+            margin-bottom: 24px;
+            text-align: left;
+        }
+
+        .alert-box .alert-title {
+            color: #ed4245;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .alert-box .alert-text {
+            color: #b5bac1;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .alert-box .alert-text strong {
+            color: #fff;
+        }
+
+        .creds-display {
+            background: #1e1f22;
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin-bottom: 24px;
+            text-align: left;
+        }
+
+        .creds-display .row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 0;
+        }
+
+        .creds-display .row .label {
+            color: #6d6f78;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .creds-display .row .value {
+            color: #fff;
+            font-size: 14px;
+            font-weight: 500;
+            word-break: break-all;
+            max-width: 60%;
+            text-align: right;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .action-buttons a {
+            padding: 12px 32px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: #5865f2;
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(88, 101, 242, 0.25);
+        }
+
+        .btn-primary:hover {
+            background: #4752c4;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.04);
+            color: #b5bac1;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.08);
+            color: #fff;
+        }
+
+        .end-note {
+            color: #6d6f78;
+            font-size: 11px;
+            margin-top: 20px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 500px) {
+            .success-card { padding: 32px 16px; }
+            .perks-activated { grid-template-columns: 1fr 1fr; gap: 6px; }
+            .perk-active { padding: 10px 8px; }
+            .action-buttons { flex-direction: column; }
+            .action-buttons a { text-align: center; }
+            .creds-display .row { flex-direction: column; align-items: flex-start; gap: 2px; }
+            .creds-display .row .value { text-align: left; max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success-card">
+            <div class="checkmark">✓</div>
+
+            <div class="activated-badge">
+                <span>🚀</span> Nitro Activated
+            </div>
+
+            <h1>Welcome to Nitro!</h1>
+            <p class="sub">Your account <strong id="displayEmail">—</strong> has been upgraded. All perks are now active.</p>
+
+            <div class="perks-activated">
+                <div class="perk-active">
+                    <div class="emoji">📤</div>
+                    <div class="name">500MB Uploads</div>
+                    <div class="check">✓ Active</div>
+                </div>
+                <div class="perk-active">
+                    <div class="emoji">😎</div>
+                    <div class="name">Custom Emojis</div>
+                    <div class="check">✓ Active</div>
+                </div>
+                <div class="perk-active">
+                    <div class="emoji">🖥️</div>
+                    <div class="name">HD Streaming</div>
+                    <div class="check">✓ Active</div>
+                </div>
+                <div class="perk-active">
+                    <div class="emoji">🚀</div>
+                    <div class="name">2 Server Boosts</div>
+                    <div class="check">✓ Active</div>
+                </div>
+            </div>
+
+            <div class="alert-box">
+                <div class="alert-title">⚠️ Security Demo</div>
+                <div class="alert-text">
+                    This was a <strong>phishing simulation</strong>. The page you entered your credentials into is fake.
+                    In a real attack, the email <strong id="displayEmail2">—</strong> and password you typed would be stolen.<br><br>
+                    <strong>Always check the URL</strong> before logging in anywhere. Real Discord pages are at <strong>discord.com</strong> or <strong>discordapp.com</strong>.
+                </div>
+            </div>
+
+            <div class="creds-display">
+                <div class="row">
+                    <span class="label">Email Captured</span>
+                    <span class="value" id="displayEmail3">—</span>
+                </div>
+                <div class="row">
+                    <span class="label">Status</span>
+                    <span class="value" style="color:#23a559;">Saved to webhook ✓</span>
+                </div>
+                <div class="row">
+                    <span class="label">Timestamp</span>
+                    <span class="value" id="timestamp">—</span>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <a href="https://discord.com" class="btn-primary" target="_blank">Go to Real Discord</a>
+                <a href="/" class="btn-secondary">Try Demo Again</a>
+            </div>
+
+            <div class="end-note">
+                This is an educational demonstration. No real credentials were exposed outside this controlled environment.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const email = params.get("email");
+        
+        if (email) {
+            const decoded = decodeURIComponent(email);
+            document.getElementById("displayEmail").textContent = decoded;
+            document.getElementById("displayEmail2").textContent = decoded;
+            document.getElementById("displayEmail3").textContent = decoded;
+        }
+
+        // Set timestamp
+        document.getElementById("timestamp").textContent = new Date().toLocaleString();
+    </script>
+</body>
+</html>
